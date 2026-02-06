@@ -18,7 +18,9 @@ export const createService = ({ pool }) => {
     if (!title.trim() || !body.trim()) {
       const msg = "title and body required";
       console.error(msg);
-      throw new Error(msg);
+      const err = new Error(msg);
+      err.status = 400;
+      throw err;
     }
 
     const result = await pool.query(
@@ -31,12 +33,16 @@ export const createService = ({ pool }) => {
     if (!Number.isFinite(id)) {
       const msg = ("Invalid id");
       console.error(msg);
-      throw new Error (msg);
+      const err = new Error(msg);
+      err.status = 400;
+      throw err;
     }
     if (!title.trim() || !body.trim()) {
       const msg = "title and body required";
       console.error(msg);
-      throw new Error(msg);
+      const err = new Error(msg);
+      err.status = 400;
+      throw err;
     }
 
     const result = await pool.query(
@@ -46,7 +52,9 @@ export const createService = ({ pool }) => {
     if (result.rows.length === 0) {
       const msg = "Note not found";
       console.error(msg);
-      throw new Error(msg);
+      const err = new Error(msg);
+      err.status = 404;
+      throw err;
     }
     return result.rows[0];
   };
@@ -55,17 +63,22 @@ export const createService = ({ pool }) => {
     if (!Number.isFinite(id)) {
       const msg = "Invalid id";
       console.error(msg);
-      throw new Error(msg);
+      const err = new Error(msg);
+      err.status = 400;
+      throw err;
     }
-    await pool.query(
+    const result = await pool.query(
       "DELETE FROM public.notes WHERE id = $1 RETURNING id",
       [id]);
 
     if (result.rows.length === 0) {
       const msg = ("Note not found");
       console.error(msg);
-      throw new Error(msg);
+      const err = new Error(msg);
+      err.status = 404;
+      throw err;
     }
+    return result.rows[0];
   }
 
   return { getDbInfo, getNotes, createNote, updateNote, deleteNote };
