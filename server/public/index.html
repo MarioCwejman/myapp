@@ -1,12 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notes</title>
     <script src="/app.js" defer></script>
-</head>
-<body>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <h1>Notes</h1>
+
+    <form id="note-form">
+      <div>
+        <label for="title">Title</label><br />
+        <input id="title" name="title" autocomplete="off" />
+      </div>
+
+      <div>
+        <label for="body">Body</label><br />
+        <textarea id="body" name="body" ></textarea>
+      </div>
+
+      <button type="submit">Add</button>
+    </form>
+
+    <p id="error" style="color: red;"></p>
+
+    <hr />
+
     <div id="notes"></div>
-</body>
+  </body>
 </html>
