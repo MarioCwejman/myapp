@@ -12,8 +12,9 @@ function setError(msg) {
   errorEl.textContent = msg || "";
 }
 
+//Instruction on how to manipulate the DOM to show the list of notes.
 function render() {
-  // clear list
+  
   notesEl.innerHTML = "";
 
   if (notes.length === 0) {
@@ -42,8 +43,7 @@ function render() {
 
     const delBtn = document.createElement("button");
     delBtn.textContent = "Delete";
-    delBtn.dataset.id = String(note.id); // store id on the button
-
+    delBtn.dataset.id = String(note.id); 
     card.appendChild(title);
     card.appendChild(body);
     card.appendChild(meta);
@@ -54,6 +54,7 @@ function render() {
   }
 }
 
+// Get notes from the server.
 async function loadNotes() {
   setError("");
 
@@ -67,6 +68,7 @@ async function loadNotes() {
   render();
 }
 
+//Post notes to the server and update the UI.
 async function createNote(title, body) {
   setError("");
 
@@ -83,15 +85,14 @@ async function createNote(title, body) {
     return;
   }
 
-  // add new note to the top 
   notes.unshift(data);
   render();
 
-  // reload page to clear form
   form.reset();
   titleInput.focus();
 }
 
+//Delete notes on the server and update the UI.
 async function deleteNote(id) {
   setError("");
 
@@ -109,7 +110,7 @@ async function deleteNote(id) {
 
 // Handle form submit
 form.addEventListener("submit", (event) => {
-  event.preventDefault(); // stops page reload
+  event.preventDefault(); 
 
   const title = titleInput.value.trim();
   const body = bodyInput.value.trim();
