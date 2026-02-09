@@ -4,7 +4,8 @@ const bodyInput = document.getElementById("body");
 const notesEl = document.getElementById("notes");
 const errorEl = document.getElementById("error");
 
-// our "state" (React-like idea)
+// state, array of { id, title, body }
+
 let notes = [];
 
 function setError(msg) {
