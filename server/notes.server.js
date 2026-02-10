@@ -6,7 +6,7 @@ import { createController } from "./notes.controller.js";
 const app = express();
 
 // HTMX forms send urlencoded by default
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 // keep JSON for api/fetch JSON
 app.use(express.json());
 

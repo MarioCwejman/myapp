@@ -17,6 +17,10 @@ export const createController = (app, deps) => {
 
   app.post("/api/notes", async (req, res) => {
     try {
+      if (typeof req.body !== "object" || req.body === null) {
+        return res.status(400).json({ error: "Invalid request body" });
+      }
+
       const note = await service.createNote(req.body);
 
       res.status(201).json(note);
